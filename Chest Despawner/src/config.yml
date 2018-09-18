@@ -8,7 +8,6 @@ rewards:
   3:
     chance: 10
     command: "/gamemode creative rewardedcarton"
-
 spawnMessage: "&aA new crate has been released!"
 foundMessage: "&a{player} &chas found the crate at: &a{location}"
 radius: 1000

@@ -40,6 +40,7 @@ public class CrateSpawner extends JavaPlugin {
 
 	public void registerListeners() {
 		PluginManager pm = Bukkit.getPluginManager();
+
 		pm.registerEvents(new ChestOpenEvent(instance), this);
 		pm.registerEvents(new SpawnCrateCommand(instance), this);
 		pm.registerEvents(new CrateRadiusCommand(instance), this);

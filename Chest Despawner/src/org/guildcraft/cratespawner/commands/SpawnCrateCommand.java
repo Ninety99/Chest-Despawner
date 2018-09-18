@@ -16,15 +16,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.guildcraft.cratespawner.CrateSpawner;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
+import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
+
+import lombok.Getter;
+
 public class SpawnCrateCommand implements Listener, CommandExecutor {
-
-	public static final Map<Block, Location> crateBlock = new HashMap<Block, Location>();
-
 	private final CrateSpawner plugin;
 
 	public SpawnCrateCommand(CrateSpawner plugin) {
 		this.plugin = plugin;
 	}
+
+	@Getter
+	private static final Map<Block, Location> crateBlock = new HashMap<Block, Location>();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -32,6 +38,7 @@ public class SpawnCrateCommand implements Listener, CommandExecutor {
 			sender.sendMessage("You cannot use this command!");
 			return true;
 		}
+
 		Player player = (Player) sender;
 
 		if (!(player.hasPermission("spawncrate.spawncrate"))) {
@@ -53,16 +60,21 @@ public class SpawnCrateCommand implements Listener, CommandExecutor {
 
 			String crate = plugin.getConfig().getString("crateType").toUpperCase();
 
-			// Hologram hologram = HologramsAPI.createHologram(plugin, loc.clone().add(0, 2,
-			// 0));
+			Hologram hologram = HologramsAPI.createHologram(plugin, loc.clone().add(0, 2, 0));
 
-			// TextLine line = hologram.appendTextLine(ChatColor.GREEN + "Item Crate");
+			TextLine line = hologram.appendTextLine(ChatColor.GREEN + "Item Crate");
 
-			loc.clone().add(0, 1, 0).getBlock().setType(Material.getMaterial(crate));
+			line.setText(ChatColor.GREEN + "Item Crate");
 
-			Bukkit.broadcastMessage(
-					ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("spawnMessage")));
+			if (Material.getMaterial(crate) != null) {
+				loc.clone().add(0, 1, 0).getBlock().setType(Material.getMaterial(crate));
 
+				Bukkit.broadcastMessage(
+						ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("spawnMessage")));
+			} else {
+				Bukkit.getServer().getLogger().info("Hologram creation failed!");
+				return true;
+			}
 			return true;
 		}
 		return true;

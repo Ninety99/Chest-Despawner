@@ -31,13 +31,13 @@ public class ChestOpenEvent implements Listener {
 
 		Block block = event.getClickedBlock();
 
-		if (!SpawnCrateCommand.crateBlock.containsKey(block))
+		if (!SpawnCrateCommand.getCrateBlock().containsKey(block))
 			return;
 
 		Player player = event.getPlayer();
 		Location loc = block.getLocation();
 
-		if (!SpawnCrateCommand.crateBlock.containsValue(loc))
+		if (!SpawnCrateCommand.getCrateBlock().containsValue(loc))
 			return;
 
 		block.setType(Material.AIR);
@@ -49,11 +49,11 @@ public class ChestOpenEvent implements Listener {
 		Bukkit.broadcastMessage(msg);
 
 		loc.getWorld().dropItemNaturally(loc, new ItemStack(Material.INK_SACK));
-		
+
 		for (Hologram hologram : HologramsAPI.getHolograms(plugin)) {
 			Location chestHoloLoc = loc.clone().add(0, 2, 0);
 			Location hologramLoc = hologram.getLocation();
-			
+
 			if (chestHoloLoc.equals(hologramLoc)) {
 				hologram.delete();
 				break;
