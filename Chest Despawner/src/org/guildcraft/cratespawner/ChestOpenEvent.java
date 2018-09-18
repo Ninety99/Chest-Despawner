@@ -41,12 +41,6 @@ public class ChestOpenEvent implements Listener {
 
 		block.setType(Material.AIR);
 
-		String msg = ChatColor.translateAlternateColorCodes('&',
-				plugin.getConfig().getString("foundMessage").replace("{player}", player.getName()).replace("{location}",
-						"" + loc.getBlockX() + " " + loc.getBlockZ()));
-
-		Bukkit.broadcastMessage(msg);
-
 		loc.getWorld().dropItemNaturally(loc, new ItemStack(Material.INK_SACK));
 
 		for (Hologram hologram : HologramsAPI.getHolograms(plugin)) {
@@ -60,8 +54,9 @@ public class ChestOpenEvent implements Listener {
 		}
 
 		SpawnCrateCommand.getCrateBlock().remove(block);
-		
-		//for debug.
-		player.sendMessage(ChatColor.GREEN + "Succesfully removed.");
+
+		Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+				plugin.getConfig().getString("foundMessage").replace("{player}", player.getName()).replace("{location}",
+						"" + loc.getBlockX() + " " + loc.getBlockZ())));
 	}
 }
