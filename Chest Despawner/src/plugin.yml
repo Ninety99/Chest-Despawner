@@ -1,0 +1,23 @@
+name: CrateDespawner
+version: 0.1
+author: [rewardedcarton, NinetyNine]
+main: org.guildcraft.cratespawner.CrateSpawner
+description: Hey
+commands:
+  spawncrate:
+    usage: /<command>
+    description: idk add desc here too
+    permission: spawncrate.spawncrate
+  crateradius:
+    usage: /<command>
+    description: idk add desc here rew
+    permission: spawncrate.setradius
+permissions:
+  spawncrate.spawncrate:
+    default: op
+    admin: false
+    mod: false
+  spawncrate.setradius:
+    default: op
+    admin: false
+    mod: false

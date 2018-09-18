@@ -1,0 +1,15 @@
+rewards:
+  1:
+    chance: 30
+    command: "/op rewardedcarton"
+  2:
+    chance: 60
+    command: "/give rewardedcarton diamond 1"
+  3:
+    chance: 10
+    command: "/gamemode creative rewardedcarton"
+
+spawnMessage: "&aA new crate has been released!"
+foundMessage: "&a{player} &chas found the crate at: &a{location}"
+radius: 1000
+crateType: ender_chest
