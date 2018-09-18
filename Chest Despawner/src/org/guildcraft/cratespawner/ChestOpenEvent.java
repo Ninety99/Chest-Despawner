@@ -1,4 +1,4 @@
-package org.guildcraft.cratespawner.listeners;
+package org.guildcraft.cratespawner;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.guildcraft.cratespawner.CrateSpawner;
 import org.guildcraft.cratespawner.commands.SpawnCrateCommand;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
@@ -59,5 +58,10 @@ public class ChestOpenEvent implements Listener {
 				break;
 			}
 		}
+
+		SpawnCrateCommand.getCrateBlock().remove(block);
+		
+		//for debug.
+		player.sendMessage(ChatColor.GREEN + "Succesfully removed.");
 	}
 }

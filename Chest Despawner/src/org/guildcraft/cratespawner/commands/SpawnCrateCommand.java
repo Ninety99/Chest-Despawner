@@ -67,15 +67,19 @@ public class SpawnCrateCommand implements Listener, CommandExecutor {
 			line.setText(ChatColor.GREEN + "Item Crate");
 
 			if (Material.getMaterial(crate) != null) {
-				loc.clone().add(0, 1, 0).getBlock().setType(Material.getMaterial(crate));
+				Location aboveBy1 = loc.clone().add(0, 1, 0);
+				aboveBy1.getBlock().setType(Material.getMaterial(crate));
+
+				if (!(crateBlock.containsKey(aboveBy1.getBlock())))
+					crateBlock.put(aboveBy1.getBlock(), aboveBy1);
 
 				Bukkit.broadcastMessage(
 						ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("spawnMessage")));
+				return true;
 			} else {
 				Bukkit.getServer().getLogger().info("Hologram creation failed!");
 				return true;
 			}
-			return true;
 		}
 		return true;
 	}
