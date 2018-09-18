@@ -18,20 +18,32 @@ public class CrateRadiusCommand implements Listener, CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender instanceof Player) {
-			Player player = (Player) sender;
-			if (cmd.getName().equalsIgnoreCase("crateradius")) {
-				if (player.hasPermission("spawncrate.setradius"))
-					if (args.length == 0) {
-						if (args[0].matches("\\d+")) {
-							int radius = Integer.parseInt(args[0]);
-							plugin.getConfig().set("radius", radius);
-						} else {
-							sender.sendMessage(ChatColor.RED + "You must specify a number!");
-						}
-					} else {
-						sender.sendMessage(ChatColor.RED + "Correct Usage: /crateradius <radius>");
-					}
+		if (!(sender instanceof Player)) {
+			sender.sendMessage(ChatColor.RED + "You can't do that!");
+			return true;
+		}
+
+		Player player = (Player) sender;
+
+		if (!(player.hasPermission("spawncrate.setradius"))) {
+			player.sendMessage(ChatColor.RED + "You do not have permissions to execute this command.");
+			return true;
+		}
+
+		if (cmd.getName().equalsIgnoreCase("crateradius")) {
+			if (args.length == 0) {
+				if (args[0].matches("\\d+")) {
+					int radius = Integer.parseInt(args[0]);
+					plugin.getConfig().set("radius", radius);
+					player.sendMessage(ChatColor.GREEN + "Succesfully set radius.");
+					return true;
+				} else {
+					player.sendMessage(ChatColor.RED + "You must specify a number!");
+					return true;
+				}
+			} else if (args.length > 1) {
+				player.sendMessage(ChatColor.RED + "Correct Usage: /crateradius <radius>");
+				return true;
 			}
 		}
 		return true;
