@@ -1,8 +1,13 @@
 package org.guildcraft.cratespawner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import lombok.Getter;
@@ -10,7 +15,10 @@ import lombok.Getter;
 public class CrateUtils implements Listener {
 
 	@Getter
-	private static final Map<String, Integer> rewards = new HashMap<String, Integer>();
+	private static final List<String> rewardList = new ArrayList<String>();
+
+	@Getter
+	private static final Map<String, Integer> rewardsToChance = new HashMap<String, Integer>();
 
 	@Getter
 	private static final Map<String, String> keys = new HashMap<String, String>();
@@ -23,9 +31,9 @@ public class CrateUtils implements Listener {
 		return CrateSpawner.getInstance().getConfig().getString("rewards." + getCurrentKey() + ".reward");
 	}
 
-	public static void registerRewards() {
+	public static void registerRewardsWithChance() {
 		for (String key : CrateSpawner.getInstance().getConfig().getConfigurationSection("rewards").getKeys(false)) {
-			rewards.put(CrateSpawner.getInstance().getConfig().getString("rewards." + key + ".reward"),
+			rewardsToChance.put(CrateSpawner.getInstance().getConfig().getString("rewards." + key + ".reward"),
 					CrateSpawner.getInstance().getConfig().getInt("rewards." + key + ".chance"));
 
 			if (keys.get(KEY_NAME_1) == null)
@@ -34,6 +42,11 @@ public class CrateUtils implements Listener {
 				keys.put(KEY_NAME_2, key);
 			else if (keys.get(KEY_NAME_3) == null)
 				keys.put(KEY_NAME_3, key);
+
+			if (rewardList.contains(key))
+				continue;
+
+			rewardList.add(key);
 		}
 	}
 
@@ -46,5 +59,12 @@ public class CrateUtils implements Listener {
 			return keys.get(KEY_NAME_3);
 
 		return "";
+	}
+
+	public static void giveRewards(Player player) {
+		// will change after testing everything
+		Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), getReward());
+		player.sendMessage(
+				ChatColor.GREEN + "Congratulations! You have found the crate. Your reward was: " + getReward());
 	}
 }

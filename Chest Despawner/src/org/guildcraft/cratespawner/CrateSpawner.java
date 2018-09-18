@@ -20,7 +20,7 @@ public class CrateSpawner extends JavaPlugin {
 		registerListeners();
 		getConfig().options().copyDefaults(true);
 		saveConfig();
-		CrateUtils.registerRewards();
+		CrateUtils.registerRewardsWithChance();
 
 		Bukkit.getLogger().info("CrateSpawner has been enabled!");
 	}
@@ -38,5 +38,9 @@ public class CrateSpawner extends JavaPlugin {
 		pm.registerEvents(new SpawnCrateCommand(instance), this);
 		pm.registerEvents(new CrateRadiusCommand(instance), this);
 		pm.registerEvents(new CrateUtils(), this);
+	}
+
+	public void registerAllRewards() {
+
 	}
 }
