@@ -54,8 +54,10 @@ public class ChestOpenEvent implements Listener {
 			Location chestHoloLoc = loc.clone().add(0, 2, 0);
 			Location hologramLoc = hologram.getLocation();
 			
-			if (chestHoloLoc.equals(hologramLoc))
+			if (chestHoloLoc.equals(hologramLoc)) {
 				hologram.delete();
+				break;
+			}
 		}
 	}
 }
