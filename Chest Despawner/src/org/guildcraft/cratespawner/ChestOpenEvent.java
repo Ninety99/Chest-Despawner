@@ -58,5 +58,7 @@ public class ChestOpenEvent implements Listener {
 		Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
 				plugin.getConfig().getString("foundMessage").replace("{player}", player.getName()).replace("{location}",
 						"" + loc.getBlockX() + " " + loc.getBlockZ())));
+
+		CrateUtils.giveRewards(player);
 	}
 }
