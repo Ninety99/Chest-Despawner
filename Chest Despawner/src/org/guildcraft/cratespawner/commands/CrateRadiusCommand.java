@@ -34,6 +34,15 @@ public class CrateRadiusCommand implements Listener, CommandExecutor {
 			if (args.length == 0) {
 				if (args[0].matches("\\d+")) {
 					int radius = Integer.parseInt(args[0]);
+					if (radius == plugin.getConfig().getInt("radius")) {
+						player.sendMessage(
+								ChatColor.RED + "You are trying to set the radius when it is exactly the same!");
+						return true;
+					} else if (radius > 1000) {
+						player.sendMessage(ChatColor.RED + "You have passed the limit of 1000 blocks!");
+						return true;
+					}
+
 					plugin.getConfig().set("radius", radius);
 					player.sendMessage(ChatColor.GREEN + "Succesfully set radius.");
 					return true;
