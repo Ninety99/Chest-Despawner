@@ -32,7 +32,7 @@ public class CrateUtils implements Listener {
 	}
 
 	public static void registerRewardsWithChance() {
-		for (String key : CrateSpawner.getInstance().getConfig().getConfigurationSection("rewards").getKeys(false)) {
+		for (String key : CrateSpawner.getInstance().getConfig().getConfigurationSection("rewards").getKeys(true)) {
 			rewardsToChance.put(CrateSpawner.getInstance().getConfig().getString("rewards." + key + ".reward"),
 					CrateSpawner.getInstance().getConfig().getInt("rewards." + key + ".chance"));
 
