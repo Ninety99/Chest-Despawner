@@ -25,12 +25,12 @@ public class CrateRadiusCommand implements Listener, CommandExecutor {
 
 		Player player = (Player) sender;
 
-		if (!(player.hasPermission("spawncrate.setradius"))) {
-			player.sendMessage(ChatColor.RED + "You do not have permissions to execute this command.");
-			return true;
-		}
-
 		if (cmd.getName().equalsIgnoreCase("crateradius")) {
+			if (!(player.hasPermission("spawncrate.setradius"))) {
+				player.sendMessage(ChatColor.RED + "You do not have permissions to execute this command.");
+				return true;
+			}
+			
 			if (args.length == 0) {
 				if (args[0].matches("\\d+")) {
 					int radius = Integer.parseInt(args[0]);

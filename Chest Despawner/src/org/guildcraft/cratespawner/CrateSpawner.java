@@ -21,6 +21,8 @@ public class CrateSpawner extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 		CrateUtils.registerRewardsWithChance();
+		getCommand("crateradius").setExecutor(new CrateRadiusCommand(instance));
+		getCommand("spawncrate").setExecutor(new SpawnCrateCommand(instance));
 
 		Bukkit.getLogger().info("CrateSpawner has been enabled!");
 	}
