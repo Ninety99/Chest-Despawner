@@ -3,6 +3,7 @@ version: 0.1
 author: [rewardedcarton, NinetyNine]
 main: org.guildcraft.cratespawner.CrateSpawner
 description: Hey
+softdepend: [HolographicDisplays]
 commands:
   spawncrate:
     usage: /<command>

@@ -52,7 +52,9 @@ public class SpawnCrateCommand implements Listener, CommandExecutor {
 				return true;
 			}
 
-			int x = ThreadLocalRandom.current().nextInt(-plugin.getConfig().getInt("radius"));
+			int negRadius = plugin.getConfig().getInt("radius");
+
+			int x = ThreadLocalRandom.current().nextInt(negRadius);
 			int z = ThreadLocalRandom.current().nextInt(plugin.getConfig().getInt("radius"));
 			int y = player.getWorld().getHighestBlockYAt(x, z);
 
