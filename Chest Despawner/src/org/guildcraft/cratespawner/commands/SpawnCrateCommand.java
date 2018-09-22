@@ -76,7 +76,8 @@ public class SpawnCrateCommand implements Listener, CommandExecutor {
 					crateBlock.put(aboveBy1.getBlock(), aboveBy1);
 
 				Bukkit.broadcastMessage(
-						ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("spawnMessage")));
+						ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("spawnMessage")
+								+ " &ain: &cX: &b" + x + " &cY: &b" + y + " &cZ: &b" + z));
 				return true;
 			} else {
 				Bukkit.getServer().getLogger().info("Hologram creation failed!");
